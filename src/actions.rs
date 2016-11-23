@@ -163,7 +163,8 @@ impl ActionHandler {
                 ls_util::range_from_vfs_file(&self.vfs, &fname)
             });
             Change {
-                span: ls_util::range_to_span(range, fname.clone()),
+                file_name: fname,
+                span: ls_util::range_to_vfs_span(range),
                 text: i.text.clone()
             }
         }).collect();

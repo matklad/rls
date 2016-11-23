@@ -15,6 +15,7 @@ use std::error::Error;
 
 use analysis::Span;
 use analysis::raw;
+use vfs;
 use hyper::Url;
 use serde::{Serialize};
 
@@ -70,14 +71,9 @@ pub mod ls_util {
         }
     }
 
-    pub fn range_to_span(this: Range, fname: PathBuf) -> Span {
-        Span {
-            file_name: fname,
-            line_start: to_usize(this.start.line),
-            column_start: to_usize(this.start.character),
-            line_end: to_usize(this.end.line),
-            column_end: to_usize(this.end.character),
-        }
+    pub fn range_to_vfs_span(this: Range, fname: PathBuf) -> vfs::Span {
+        ((to_usize(this.start.line), to_usize(this.start.character)),
+         (to_usize(this.end.line), to_usize(this.end.character))).into()
     }
     
     pub fn range_from_vfs_file(_vfs: &Vfs, _fname: &Path) -> Range {

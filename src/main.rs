@@ -18,7 +18,7 @@
 #![feature(rustc_private)]
 #![feature(integer_atomics)]
 #![feature(drain_filter)]
-#![feature(rust_2018_preview)]
+#![feature(rust_2018_preview, use_extern_macros)]
 
 #![warn(rust_2018_idioms)]
 #![allow(unknown_lints)]
@@ -57,6 +57,7 @@ pub mod cmd;
 pub mod config;
 pub mod lsp_data;
 pub mod server;
+pub mod concurrency;
 
 #[cfg(test)]
 mod test;

@@ -1775,7 +1775,7 @@ fn fail_uninitialized_request() {
     ];
 
     let (mut server, results) = env.mock_server(messages);
-
+    println!("A");
     // Return error response to pre `initialize` request, keep running.
     assert_eq!(
         ls_server::LsService::handle_message(&mut server),
@@ -1793,12 +1793,13 @@ fn fail_uninitialized_request() {
             message,
         );
     }
-
+    println!("B");
     // Initialize and build.
     assert_eq!(
         ls_server::LsService::handle_message(&mut server),
         ls_server::ServerStateChange::Continue
     );
+    println!("C");
     expect_messages(
         &mut server,
         results.clone(),
@@ -1812,6 +1813,7 @@ fn fail_uninitialized_request() {
             ExpectedMessage::new(None).expect_contains("progress").expect_contains(r#""done":true"#),
         ],
     );
+    println!("D");
 }
 
 // FIXME disabled since it is failing in the Rust repo.
